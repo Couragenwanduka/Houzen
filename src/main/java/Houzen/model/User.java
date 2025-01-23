@@ -1,10 +1,13 @@
 package Houzen.model;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.Email;
+// import Houzen.model.Role;
 
 // import javax.validation.constraints.*;
 
@@ -35,6 +38,9 @@ public class User {
     private String location;
 
     private boolean isVerified;
+
+    @DBRef
+    private Role role = Role.USER;
     // No-argument constructor
     public User() {
     }
@@ -87,6 +93,12 @@ public class User {
     public void setVerified(boolean verified) {
         isVerified = verified;
     }
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+    }
     // toString method
     @Override
     public String toString() {
@@ -98,6 +110,7 @@ public class User {
                 ", phoneNumber=" + phoneNumber +
                 ", location='" + location + '\'' +
                 ", isVerified=" + isVerified +
+                ", role=" + role +
                 '}';
     }
 
